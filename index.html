@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Ucapan Ulang Tahun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            padding: 15px;
+        }
+        .letter {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 4px solid #ff4081;
+        }
+        .letter h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ff4081;
+            animation: bounce 1s infinite;
+        }
+        .letter p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+        }
+        .signature {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-top: 15px;
+            color: #ff4081;
+        }
+        .button {
+            background: #ff4081;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #d81b60;
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="letter">
+        <img src="foto.jpg" alt="Foto Ulang Tahun" class="profile-img">
+        <h1>💌 Happy Birthday Tiara 💌</h1>
+        <p id="message" class="hidden"></p>
+        <button class="button" id="messageButton" onclick="revealMessage()">Buka Surat</button>
+        <p class="signature hidden">By Dani</p>
+    </div>
+    <audio id="birthdaySong" src="selamat.mp3"></audio>
+    <script>
+        let messages = [
+            "Selamat Ulang Tahun Tiara! 🎉 Semoga kebahagiaan selalu menyertaimu di setiap langkahmu!",
+            "Selamat bertambah usia! 🎁 Semoga hidupmu selalu dipenuhi kebahagiaan, dikelilingi orang-orang yang menyayangimu, dan diberkahi dengan kesehatan serta kesuksesan yang tak terbatas!",
+            "Di hari ulang tahunmu ini, aku berharap yang terbaik untukmu.",
+            "Semoga hari ini membawa senyum dan kegembiraan yang tak terlupakan! Selamat ulang tahun Tir! 🎈"
+        ];
+        let messageIndex = 0;
+
+        function revealMessage() {
+            let messageElement = document.getElementById('message');
+            let buttonElement = document.getElementById('messageButton');
+            
+            if (messageIndex < messages.length) {
+                messageElement.innerText = messages[messageIndex];
+                messageElement.classList.remove('hidden');
+                document.querySelector('.signature').classList.remove('hidden');
+                
+                // Ubah teks tombol setelah pertama kali ditekan
+                if (messageIndex === 0) {
+                    let audio = document.getElementById("birthdaySong");
+                    audio.play().catch(error => console.log("Gagal memutar audio:", error));
+                }
+                buttonElement.innerText = "Tekan Lagi"; // Mengubah teks tombol
+                
+                messageIndex++; // Pindah ke pesan berikutnya
+            } else {
+                alert("Semua pesan telah ditampilkan! 🎉");
+            }
+        }
+    </script>
+</body>
+</html>
